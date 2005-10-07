@@ -1,0 +1,3 @@
+<use name=DQM/EcalBarrelMonitorTasks>
+
+<bin file=tester.cc tester></bin>
