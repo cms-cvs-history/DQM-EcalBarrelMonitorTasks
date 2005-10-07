@@ -1,5 +1,5 @@
 <use name=DQM/EcalBarrelMonitorTasks>
 
-<bin name=tester.exe file=tester.cc>
+<bin name=testEBMonitorUtils.exe file=testEBMonitorUtils.cc>
   <use name=DQM/EcalBarrelMonitorTasks>
 </bin>
