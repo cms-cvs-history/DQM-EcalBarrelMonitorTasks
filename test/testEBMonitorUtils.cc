@@ -1,8 +1,8 @@
 /*
- * \file EBCosmicTask.cc
+ * \file testEBMonitorUtils.cc
  * 
- * $Date: 2005/10/08 08:55:06 $
- * $Revision: 1.3 $
+ * $Date: 2005/10/08 08:59:31 $
+ * $Revision: 1.2 $
  * \author B. Gobbo
  *
 */
