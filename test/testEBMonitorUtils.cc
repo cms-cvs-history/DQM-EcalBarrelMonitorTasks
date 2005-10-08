@@ -1,3 +1,12 @@
+/*
+ * \file EBCosmicTask.cc
+ * 
+ * $Date: 2005/10/08 08:55:06 $
+ * $Revision: 1.3 $
+ * \author B. Gobbo
+ *
+*/
+
 #include <iostream>
 
 #include <DQM/EcalBarrelMonitorTasks/interface/EBMonitorUtils.h>
