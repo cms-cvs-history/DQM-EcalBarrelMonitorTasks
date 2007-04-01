@@ -53,8 +53,8 @@ module ecalBarrelBeamHodoTask = EBBeamHodoTask{
   InputTag EcalUncalibratedRecHitCollection = ecalUncalibHit:EcalUncalibRecHitsEB
   InputTag EcalTBHodoscopeRawInfo = ecalEBunpacker:
   InputTag EcalTBTDCRawInfo = ecalEBunpacker:
-  InputTag EcalTBTDCRecInfo = tdcReco:EcalTBTDCRecInfo
-  InputTag EcalTBHodoscopeRecInfo = hodoscopeReco:EcalTBHodoscopeRecInfo
+  InputTag EcalTBTDCRecInfo = ecal2006TBTDCReconstructor:EcalTBTDCRecInfo
+  InputTag EcalTBHodoscopeRecInfo = ecal2006TBHodoscopeReconstructor:EcalTBHodoscopeRecInfo
 }
 module ecalBarrelBeamCaloTask = EBBeamCaloTask{
   InputTag EcalTBEventHeader = ecalEBunpacker:
@@ -62,7 +62,6 @@ module ecalBarrelBeamCaloTask = EBBeamCaloTask{
   InputTag EBDigiCollection = ecalEBunpacker:
   InputTag EcalUncalibratedRecHitCollection = ecalUncalibHit:EcalUncalibRecHitsEB
 }
-
 module ecalBarrelClusterTask = EBClusterTask{ 
   InputTag islandBarrelBasicClusterCollection = islandBasicClusters:islandBarrelBasicClusters
   InputTag islandBarrelSuperClusterCollection = islandSuperClusters:islandBarrelSuperClusters
