@@ -1,0 +1,14 @@
+
+replace ecalBarrelOccupancyTask.enableCleanup = false
+replace ecalBarrelIntegrityTask.enableCleanup = false
+replace ecalBarrelCosmicTask.enableCleanup = false
+replace ecalBarrelLaserTask.enableCleanup = false
+replace ecalBarrelPedestalOnlineTask.enableCleanup = false
+replace ecalBarrelPedestalTask.enableCleanup = false
+replace ecalBarrelTestPulseTask.enableCleanup = false
+replace ecalBarrelTriggerTowerTask.enableCleanup = false
+replace ecalBarrelTimingTask.enableCleanup = false
+replace ecalBarrelBeamHodoTask.enableCleanup = false
+replace ecalBarrelBeamCaloTask.enableCleanup = false
+replace ecalBarrelClusterTask.enableCleanup = false
+
