@@ -1,0 +1,5 @@
+module ecalBarrelOccupancyTask = EBOccupancyTask{
+  untracked bool enableCleanup = true
+  InputTag EBDigiCollection = ecalEBunpacker:
+  InputTag EcalPnDiodeDigiCollection = ecalEBunpacker:
+}

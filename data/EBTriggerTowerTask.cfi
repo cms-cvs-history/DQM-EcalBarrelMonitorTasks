@@ -1,0 +1,5 @@
+module ecalBarrelTriggerTowerTask = EBTriggerTowerTask{
+  untracked bool enableCleanup = true
+  InputTag EcalTrigPrimDigiCollection = ecalEBunpacker:
+  InputTag EcalUncalibratedRecHitCollection = ecalUncalibHit:EcalUncalibRecHitsEB
+}
