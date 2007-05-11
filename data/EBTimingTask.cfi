@@ -1,4 +1,0 @@
-module ecalBarrelTimingTask = EBTimingTask{
-  untracked bool enableCleanup = true
-  InputTag EcalUncalibratedRecHitCollection = ecalUncalibHit:EcalUncalibRecHitsEB
-}
