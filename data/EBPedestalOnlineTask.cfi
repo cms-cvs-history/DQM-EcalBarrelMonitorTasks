@@ -1,4 +1,0 @@
-module ecalBarrelPedestalOnlineTask = EBPedestalOnlineTask{
-  untracked bool enableCleanup = true
-  InputTag EBDigiCollection = ecalEBunpacker:
-}
