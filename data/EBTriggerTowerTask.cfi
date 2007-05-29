@@ -2,5 +2,5 @@ module ecalBarrelTriggerTowerTask = EBTriggerTowerTask{
     untracked bool enableCleanup = true
     InputTag EcalTrigPrimDigiCollectionReal = ecalEBunpacker
     InputTag EcalTrigPrimDigiCollectionEmul = ecalTriggerPrimitiveDigis
-    untracked string   OutputRootFile = ""
+    untracked string OutputRootFile = ""
 }
