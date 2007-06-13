@@ -1,7 +1,7 @@
 module ecalBarrelLaserTask = EBLaserTask{
   untracked bool enableCleanup = true
   InputTag EcalRawDataCollection = ecalEBunpacker:
-  InputTag EBDigiCollection = ecalEBunpacker:ebDigi
+  InputTag EBDigiCollection = ecalEBunpacker:ebDigis
   InputTag EcalPnDiodeDigiCollection = ecalEBunpacker:
   InputTag EcalUncalibratedRecHitCollection = ecalUncalibHit:EcalUncalibRecHitsEB
 }
