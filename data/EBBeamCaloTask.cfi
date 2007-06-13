@@ -2,6 +2,6 @@ module ecalBarrelBeamCaloTask = EBBeamCaloTask{
   untracked bool enableCleanup = true
   InputTag EcalTBEventHeader = ecalEBunpacker:
   InputTag EcalRawDataCollection = ecalEBunpacker:
-  InputTag EBDigiCollection = ecalEBunpacker:
+  InputTag EBDigiCollection = ecalEBunpacker:ebDigi
   InputTag EcalUncalibratedRecHitCollection = ecalUncalibHit:EcalUncalibRecHitsEB
 }
