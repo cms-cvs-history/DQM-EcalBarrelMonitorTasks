@@ -26,7 +26,6 @@
 - EBCosmicTask
 - EBIntegrityTask
 - EBLaserTask
-- EBLedTask
 - EBMUtilsTasks
 - EBOccupancyTask
 - EBPedestalOnlineTask
@@ -41,7 +40,6 @@
 - EBCosmicTask
 - EBIntegrityTask
 - EBLaserTask
-- EBLedTask
 - EBOccupancyTask
 - EBPedestalOnlineTask
 - EBPedestalTask
