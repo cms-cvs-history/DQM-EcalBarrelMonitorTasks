@@ -7,8 +7,10 @@ module ecalBarrelIntegrityTask = EBIntegrityTask{
   InputTag EBDetIdCollection4 = ecalEBunpacker:EcalIntegrityGainSwitchStayErrors
   InputTag EcalTrigTowerDetIdCollection1 = ecalEBunpacker:EcalIntegrityTTIdErrors
   InputTag EcalTrigTowerDetIdCollection2 = ecalEBunpacker:EcalIntegrityBlockSizeErrors
-  InputTag EcalElectronicsIdCollection1 = ecalEBunpacker:EcalIntegrityMemTtIdErrors
-  InputTag EcalElectronicsIdCollection2 = ecalEBunpacker:EcalIntegrityMemBlockSize
-  InputTag EcalElectronicsIdCollection3 = ecalEBunpacker:EcalIntegrityMemChIdErrors
-  InputTag EcalElectronicsIdCollection4 = ecalEBunpacker:EcalIntegrityMemGainErrors
+  InputTag EcalElectronicsIdCollection1 = ecalEBunpacker:EcalIntegrityTTIdErrors
+  InputTag EcalElectronicsIdCollection2 = ecalEBunpacker:EcalIntegrityBlockSizeErrors
+  InputTag EcalElectronicsIdCollection3 = ecalEBunpacker:EcalIntegrityMemTtIdErrors
+  InputTag EcalElectronicsIdCollection4 = ecalEBunpacker:EcalIntegrityMemBlockSize
+  InputTag EcalElectronicsIdCollection5 = ecalEBunpacker:EcalIntegrityMemChIdErrors
+  InputTag EcalElectronicsIdCollection6 = ecalEBunpacker:EcalIntegrityMemGainErrors
 }
