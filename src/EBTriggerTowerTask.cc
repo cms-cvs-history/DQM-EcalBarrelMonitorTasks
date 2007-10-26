@@ -1,9 +1,11 @@
 /*
  * \file EBTriggerTowerTask.cc
  *
- * $Date: 2007/10/04 11:48:46 $
- * $Revision: 1.43 $
+ * $Date: 2007/10/25 22:40:00 $
+ * $Revision: 1.46 $
+ * \author C. Bernet
  * \author G. Della Ricca
+ * \author E. Di Marco
  *
 */
 
@@ -173,7 +175,7 @@ void EBTriggerTowerTask::setup( DaqMonitorBEInterface* dbe,
     (*meEtMap)[i] = dbe->book3D(etMapNameSM.c_str(), etMapNameSM.c_str(),
 				nTTEta, 0, nTTEta,
 				nTTPhi, 0, nTTPhi,
-				128, 0, 512.);
+				256, 0, 256.);
     dbe->tag((*meEtMap)[i], i+1);
 
     string  fineGrainVetoNameSM = fineGrainVetoName;
