@@ -2,6 +2,8 @@
 include "DQM/EcalBarrelMonitorTasks/data/EBOccupancyTask.cfi"
 include "DQM/EcalBarrelMonitorTasks/data/EBIntegrityTask.cfi"
 
+include "DQM/EcalBarrelMonitorTasks/data/EBStatusFlagsTask.cfi"
+
 include "DQM/EcalBarrelMonitorTasks/data/EBCosmicTask.cfi"
 include "DQM/EcalBarrelMonitorTasks/data/EBLaserTask.cfi"
 include "DQM/EcalBarrelMonitorTasks/data/EBPedestalOnlineTask.cfi"
@@ -18,6 +20,7 @@ include "DQM/EcalBarrelMonitorTasks/data/EBClusterTask.cfi"
 
 sequence ecalBarrelDefaultTasksSequence = { ecalBarrelOccupancyTask,
                                             ecalBarrelIntegrityTask,
+                                            ecalBarrelStatusFlagsTask,
                                             ecalBarrelLaserTask,
                                             ecalBarrelPedestalOnlineTask,
                                             ecalBarrelPedestalTask,

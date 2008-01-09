@@ -2,6 +2,8 @@
 replace ecalBarrelOccupancyTask.enableCleanup = true
 replace ecalBarrelIntegrityTask.enableCleanup = true
 
+replace ecalBarrelStatusFlagsTask.enableCleanup = true
+
 replace ecalBarrelCosmicTask.enableCleanup = true
 replace ecalBarrelLaserTask.enableCleanup = true
 replace ecalBarrelPedestalOnlineTask.enableCleanup = true

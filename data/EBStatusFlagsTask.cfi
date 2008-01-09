@@ -1,0 +1,4 @@
+module ecalBarrelStatusFlagsTask = EBStatusFlagsTask{
+  untracked bool enableCleanup = true
+  InputTag EcalRawDataCollection = ecalEBunpacker:
+}
