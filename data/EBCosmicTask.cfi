@@ -1,5 +1,8 @@
 module ecalBarrelCosmicTask = EBCosmicTask{
   untracked bool enableCleanup = true
   InputTag EcalRawDataCollection = ecalEBunpacker:
+  InputTag EcalUncalibRecHitCollection = ecalUncalibHit:EcalUncalibRecHitsEB
   InputTag EcalRecHitCollection = ecalRecHit:EcalRecHitsEB
+  double MinJitter = -2
+  double MaxJitter = 1.5
 }
