@@ -4,7 +4,6 @@ module ecalBarrelIntegrityTask = EBIntegrityTask{
   InputTag EBDetIdCollection1 = ecalEBunpacker:EcalIntegrityGainErrors
   InputTag EBDetIdCollection2 = ecalEBunpacker:EcalIntegrityChIdErrors
   InputTag EBDetIdCollection3 = ecalEBunpacker:EcalIntegrityGainSwitchErrors
-  InputTag EBDetIdCollection4 = ecalEBunpacker:EcalIntegrityGainSwitchStayErrors
   InputTag EcalElectronicsIdCollection1 = ecalEBunpacker:EcalIntegrityTTIdErrors
   InputTag EcalElectronicsIdCollection2 = ecalEBunpacker:EcalIntegrityBlockSizeErrors
   InputTag EcalElectronicsIdCollection3 = ecalEBunpacker:EcalIntegrityMemTtIdErrors
