@@ -1,3 +1,15 @@
+include "DQM/EcalBarrelMonitorTasks/data/EBBeamCaloTask.cfi"
+include "DQM/EcalBarrelMonitorTasks/data/EBBeamHodoTask.cfi"
+include "DQM/EcalBarrelMonitorTasks/data/EBClusterTask.cfi"
+include "DQM/EcalBarrelMonitorTasks/data/EBCosmicTask.cfi"
+include "DQM/EcalBarrelMonitorTasks/data/EBIntegrityTask.cfi"
+include "DQM/EcalBarrelMonitorTasks/data/EBLaserTask.cfi"
+include "DQM/EcalBarrelMonitorTasks/data/EBOccupancyTask.cfi"
+include "DQM/EcalBarrelMonitorTasks/data/EBPedestalOnlineTask.cfi"
+include "DQM/EcalBarrelMonitorTasks/data/EBPedestalTask.cfi"
+include "DQM/EcalBarrelMonitorTasks/data/EBTestPulseTask.cfi"
+include "DQM/EcalBarrelMonitorTasks/data/EBTimingTask.cfi"
+include "DQM/EcalBarrelMonitorTasks/data/EBTriggerTowerTask.cfi"
 
 replace ecalBarrelOccupancyTask.enableCleanup = true
 replace ecalBarrelIntegrityTask.enableCleanup = true
