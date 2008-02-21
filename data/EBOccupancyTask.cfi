@@ -3,6 +3,6 @@ module ecalBarrelOccupancyTask = EBOccupancyTask{
   InputTag EBDigiCollection = ecalEBunpacker:ebDigis
   InputTag EcalPnDiodeDigiCollection = ecalEBunpacker:
   InputTag EcalRecHitCollection = ecalRecHit:EcalRecHitsEB
-  InputTag EcalTrigPrimDigiCollection = ecalEBunpacker:EBTT
+  InputTag EcalTrigPrimDigiCollection = ecalEBunpacker:EcalTriggerPrimitives
   InputTag EcalRawDataCollection = ecalEBunpacker:
 }
