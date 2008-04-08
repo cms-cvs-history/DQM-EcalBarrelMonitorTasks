@@ -1,4 +1,5 @@
 module ecalBarrelTriggerTowerTask = EBTriggerTowerTask{
+  untracked string prefixME = "EcalBarrel"  
   untracked bool enableCleanup = true
   InputTag EcalTrigPrimDigiCollectionReal = ecalEBunpacker:EcalTriggerPrimitives
   InputTag EcalTrigPrimDigiCollectionEmul = ecalTriggerPrimitiveDigis

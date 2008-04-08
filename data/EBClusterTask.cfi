@@ -1,4 +1,5 @@
 module ecalBarrelClusterTask = EBClusterTask{
+  untracked string prefixME = "EcalBarrel"  
   untracked bool enableCleanup = true
   InputTag BasicClusterCollection = islandBasicClusters:islandBarrelBasicClusters
   InputTag SuperClusterCollection = hybridSuperClusters:

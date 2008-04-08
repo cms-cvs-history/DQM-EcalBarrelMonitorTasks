@@ -1,4 +1,5 @@
 module ecalBarrelCosmicTask = EBCosmicTask{
+  untracked string prefixME = "EcalBarrel"  
   untracked bool enableCleanup = true
   InputTag EcalRawDataCollection = ecalEBunpacker:
   InputTag EcalUncalibratedRecHitCollection = ecalUncalibHit:EcalUncalibRecHitsEB
