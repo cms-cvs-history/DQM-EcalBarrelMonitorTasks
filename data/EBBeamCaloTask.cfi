@@ -1,6 +1,6 @@
 module ecalBarrelBeamCaloTask = EBBeamCaloTask{
   untracked string prefixME = "EcalBarrel"
-  untracked bool enableCleanup = true
+  untracked bool enableCleanup = false
   InputTag EcalTBEventHeader = ecalEBunpacker:
   InputTag EcalRawDataCollection = ecalEBunpacker:
   InputTag EBDigiCollection = ecalEBunpacker:ebDigis

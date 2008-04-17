@@ -1,5 +1,5 @@
 module ecalBarrelPedestalOnlineTask = EBPedestalOnlineTask{
   untracked string prefixME = "EcalBarrel"  
-  untracked bool enableCleanup = true
+  untracked bool enableCleanup = false
   InputTag EBDigiCollection = ecalEBunpacker:ebDigis
 }

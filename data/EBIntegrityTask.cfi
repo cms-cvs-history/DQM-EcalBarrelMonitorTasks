@@ -1,6 +1,6 @@
 module ecalBarrelIntegrityTask = EBIntegrityTask{
   untracked string prefixME = "EcalBarrel"  
-  untracked bool enableCleanup = true
+  untracked bool enableCleanup = false
   InputTag EBDetIdCollection0 = ecalEBunpacker:EcalIntegrityDCCSizeErrors
   InputTag EBDetIdCollection1 = ecalEBunpacker:EcalIntegrityGainErrors
   InputTag EBDetIdCollection2 = ecalEBunpacker:EcalIntegrityChIdErrors
