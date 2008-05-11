@@ -1,0 +1,32 @@
+include "DQM/EcalBarrelMonitorTasks/data/EBBeamCaloTask.cfi"
+include "DQM/EcalBarrelMonitorTasks/data/EBBeamHodoTask.cfi"
+include "DQM/EcalBarrelMonitorTasks/data/EBClusterTask.cfi"
+include "DQM/EcalBarrelMonitorTasks/data/EBCosmicTask.cfi"
+include "DQM/EcalBarrelMonitorTasks/data/EBIntegrityTask.cfi"
+include "DQM/EcalBarrelMonitorTasks/data/EBLaserTask.cfi"
+include "DQM/EcalBarrelMonitorTasks/data/EBOccupancyTask.cfi"
+include "DQM/EcalBarrelMonitorTasks/data/EBPedestalOnlineTask.cfi"
+include "DQM/EcalBarrelMonitorTasks/data/EBPedestalTask.cfi"
+include "DQM/EcalBarrelMonitorTasks/data/EBTestPulseTask.cfi"
+include "DQM/EcalBarrelMonitorTasks/data/EBTimingTask.cfi"
+include "DQM/EcalBarrelMonitorTasks/data/EBTriggerTowerTask.cfi"
+
+replace ecalBarrelOccupancyTask.mergeRuns = true
+replace ecalBarrelIntegrityTask.mergeRuns = true
+
+replace ecalBarrelStatusFlagsTask.mergeRuns = true
+
+replace ecalBarrelCosmicTask.mergeRuns = true
+replace ecalBarrelLaserTask.mergeRuns = true
+replace ecalBarrelPedestalOnlineTask.mergeRuns = true
+replace ecalBarrelPedestalTask.mergeRuns = true
+replace ecalBarrelTestPulseTask.mergeRuns = true
+
+replace ecalBarrelTriggerTowerTask.mergeRuns = true
+replace ecalBarrelTimingTask.mergeRuns = true
+
+replace ecalBarrelBeamHodoTask.mergeRuns = true
+replace ecalBarrelBeamCaloTask.mergeRuns = true
+
+replace ecalBarrelClusterTask.mergeRuns = true
+
