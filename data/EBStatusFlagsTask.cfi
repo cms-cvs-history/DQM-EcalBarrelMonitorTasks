@@ -1,5 +1,6 @@
 module ecalBarrelStatusFlagsTask = EBStatusFlagsTask{
   untracked string prefixME = "EcalBarrel"  
   untracked bool enableCleanup = false
+  untracked bool mergeRuns = false
   InputTag EcalRawDataCollection = ecalEBunpacker:
 }

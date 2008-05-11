@@ -1,6 +1,7 @@
 module ecalBarrelTimingTask = EBTimingTask{
   untracked string prefixME = "EcalBarrel"  
   untracked bool enableCleanup = false
+  untracked bool mergeRuns = false
   InputTag EcalRawDataCollection = ecalEBunpacker:
   InputTag EcalUncalibratedRecHitCollection = ecalUncalibHit:EcalUncalibRecHitsEB
 }

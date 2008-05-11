@@ -1,6 +1,7 @@
 module ecalBarrelBeamHodoTask = EBBeamHodoTask{
   untracked string prefixME = "EcalBarrel"
   untracked bool enableCleanup = false
+  untracked bool mergeRuns = false
   InputTag EcalTBEventHeader = ecalEBunpacker:
   InputTag EcalRawDataCollection = ecalEBunpacker:
   InputTag EcalUncalibratedRecHitCollection = ecalUncalibHit:EcalUncalibRecHitsEB
