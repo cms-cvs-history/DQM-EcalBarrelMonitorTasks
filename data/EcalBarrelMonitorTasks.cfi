@@ -19,6 +19,7 @@ include "DQM/EcalBarrelMonitorTasks/data/EBBeamCaloTask.cfi"
 include "DQM/EcalBarrelMonitorTasks/data/EBClusterTask.cfi"
 
 include "DQM/EcalBarrelMonitorTasks/data/EBSelectiveReadoutTask.cfi"
+include "DQM/EcalBarrelMonitorTasks/data/EBRawDataTask.cfi"
 
 sequence ecalBarrelDefaultTasksSequence = { ecalBarrelOccupancyTask,
                                             ecalBarrelIntegrityTask,

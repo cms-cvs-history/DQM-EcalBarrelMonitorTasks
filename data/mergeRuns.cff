@@ -12,6 +12,7 @@ include "DQM/EcalBarrelMonitorTasks/data/EBTestPulseTask.cfi"
 include "DQM/EcalBarrelMonitorTasks/data/EBTimingTask.cfi"
 include "DQM/EcalBarrelMonitorTasks/data/EBTriggerTowerTask.cfi"
 include "DQM/EcalBarrelMonitorTasks/data/EBSelectiveReadoutTask.cfi"
+include "DQM/EcalBarrelMonitorTasks/data/EBRawDataTask.cfi"
 
 replace ecalBarrelOccupancyTask.mergeRuns = true
 replace ecalBarrelIntegrityTask.mergeRuns = true
@@ -33,3 +34,4 @@ replace ecalBarrelBeamCaloTask.mergeRuns = true
 replace ecalBarrelClusterTask.mergeRuns = true
 
 replace ecalBarrelSelectiveReadoutTask.mergeRuns = true
+replace ecalBarrelRawDataTask.mergeRuns = true
