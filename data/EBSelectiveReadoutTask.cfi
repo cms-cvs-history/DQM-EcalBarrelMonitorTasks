@@ -1,5 +1,4 @@
 module ecalBarrelSelectiveReadoutTask = EBSelectiveReadoutTask {
-
     untracked string prefixME = "EcalBarrel"
     untracked bool enableCleanup = false
     untracked bool mergeRuns = false
@@ -8,5 +7,4 @@ module ecalBarrelSelectiveReadoutTask = EBSelectiveReadoutTask {
     InputTag EBSRFlagCollection = ecalEBunpacker
     InputTag EcalTrigPrimDigiCollection = ecalEBunpacker:EcalTriggerPrimitives
     InputTag EcalFEDRawCollection = source
-
 }

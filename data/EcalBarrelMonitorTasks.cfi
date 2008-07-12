@@ -24,6 +24,8 @@ include "DQM/EcalBarrelMonitorTasks/data/EBRawDataTask.cfi"
 sequence ecalBarrelDefaultTasksSequence = { ecalBarrelOccupancyTask,
                                             ecalBarrelIntegrityTask,
                                             ecalBarrelStatusFlagsTask,
+                                            ecalBarrelSelectiveReadoutTask,
+                                            ecalBarrelRawDataTask,
                                             ecalBarrelLaserTask,
                                             ecalBarrelPedestalOnlineTask,
                                             ecalBarrelPedestalTask,
