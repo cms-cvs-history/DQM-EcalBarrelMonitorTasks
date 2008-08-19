@@ -4,6 +4,6 @@ module ecalBarrelClusterTask = EBClusterTask{
   untracked bool mergeRuns = false
   InputTag EcalRawDataCollection = ecalEBunpacker:
   InputTag BasicClusterCollection = hybridSuperClusters:hybridBarrelBasicClusters
-  InputTag SuperClusterCollection = correctedHybridSuperClusters
+  InputTag SuperClusterCollection = correctedHybridSuperClusters:
   InputTag EcalRecHitCollection = ecalRecHit:EcalRecHitsEB
 }
