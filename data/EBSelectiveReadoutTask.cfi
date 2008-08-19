@@ -3,8 +3,8 @@ module ecalBarrelSelectiveReadoutTask = EBSelectiveReadoutTask {
     untracked bool enableCleanup = false
     untracked bool mergeRuns = false
     InputTag EBDigiCollection = ecalEBunpacker:ebDigis
-    InputTag EBUsuppressedDigiCollection = ecalUnsuppressedDigis
-    InputTag EBSRFlagCollection = ecalEBunpacker
+    InputTag EBUsuppressedDigiCollection = ecalUnsuppressedDigis:
+    InputTag EBSRFlagCollection = ecalEBunpacker:
     InputTag EcalTrigPrimDigiCollection = ecalEBunpacker:EcalTriggerPrimitives
     InputTag EcalFEDRawCollection = source
 }
