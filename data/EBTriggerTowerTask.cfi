@@ -3,6 +3,6 @@ module ecalBarrelTriggerTowerTask = EBTriggerTowerTask{
   untracked bool enableCleanup = false
   untracked bool mergeRuns = false
   InputTag EcalTrigPrimDigiCollectionReal = ecalEBunpacker:EcalTriggerPrimitives
-  InputTag EcalTrigPrimDigiCollectionEmul = ecalTriggerPrimitiveDigis:
+  InputTag EcalTrigPrimDigiCollectionEmul = simEcalTriggerPrimitiveDigis:
   untracked string OutputRootFile = ""
 }
