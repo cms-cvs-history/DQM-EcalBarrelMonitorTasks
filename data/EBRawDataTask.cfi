@@ -1,8 +1,0 @@
-module ecalBarrelRawDataTask = EBRawDataTask {
-    untracked string prefixME = "EcalBarrel"
-    untracked bool enableCleanup = false
-    untracked bool mergeRuns = false
-    InputTag FEDRawDataCollection = source
-    InputTag EcalRawDataCollection = ecalEBunpacker:
-    InputTag GTEvmSource = l1GtEvmUnpack:
-}
