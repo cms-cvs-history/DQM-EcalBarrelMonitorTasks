@@ -4,8 +4,8 @@
 /*
  * \file EBRawDataTask.h
  *
- * $Date: 2008/12/05 07:52:00 $
- * $Revision: 1.5 $
+ * $Date: 2008/08/07 10:06:14 $
+ * $Revision: 1.3 $
  * \author E. Di Marco
  *
 */
@@ -67,23 +67,18 @@ bool mergeRuns_;
 
 edm::InputTag FEDRawDataCollection_;
 edm::InputTag EcalRawDataCollection_;
+edm::InputTag GTEvmSource_;
 
 MonitorElement* meEBCRCErrors_;
 MonitorElement* meEBEventTypePreCalibrationBX_;
 MonitorElement* meEBEventTypeCalibrationBX_;
 MonitorElement* meEBEventTypePostCalibrationBX_;
 MonitorElement* meEBRunNumberErrors_;
+MonitorElement* meEBL1AErrors_;
 MonitorElement* meEBOrbitNumberErrors_;
+MonitorElement* meEBBunchCrossingErrors_;
 MonitorElement* meEBTriggerTypeErrors_;
-MonitorElement* meEBCalibrationEventErrors_;
-MonitorElement* meEBL1ADCCErrors_;
-MonitorElement* meEBBunchCrossingDCCErrors_;
-MonitorElement* meEBL1AFEErrors_;
-MonitorElement* meEBBunchCrossingFEErrors_;
-MonitorElement* meEBL1ATCCErrors_;
-MonitorElement* meEBBunchCrossingTCCErrors_;
-MonitorElement* meEBL1ASRPErrors_;
-MonitorElement* meEBBunchCrossingSRPErrors_;
+MonitorElement* meEBGapErrors_;
 
 bool init_;
 
