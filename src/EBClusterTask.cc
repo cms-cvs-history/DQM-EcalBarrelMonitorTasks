@@ -1,8 +1,8 @@
 /*
  * \file EBClusterTask.cc
  *
- * $Date: 2009/03/30 18:42:00 $
- * $Revision: 1.76 $
+ * $Date: 2008/12/03 12:55:49 $
+ * $Revision: 1.68 $
  * \author G. Della Ricca
  * \author E. Di Marco
  *
@@ -22,7 +22,6 @@
 
 #include "DataFormats/EcalRawData/interface/EcalRawDataCollections.h"
 #include "DataFormats/EgammaReco/interface/BasicCluster.h"
-#include "DataFormats/EgammaReco/interface/BasicClusterFwd.h"
 #include "DataFormats/EgammaReco/interface/SuperCluster.h"
 #include "DataFormats/EgammaReco/interface/SuperClusterFwd.h"
 #include "FWCore/Framework/interface/ESHandle.h"
@@ -99,10 +98,10 @@ EBClusterTask::EBClusterTask(const ParameterSet& ps){
   meSCSeedTimingMap_ = 0;
   for(int i=0;i<36;++i)
      meSCSeedTiming_[i] = 0;
-
+  
   mes1s9_  = 0;
   mes9s25_  = 0;
-
+ 
   meInvMassPi0_ = 0;
   meInvMassJPsi_ = 0;
   meInvMassZ0_ = 0;
@@ -178,13 +177,13 @@ void EBClusterTask::reset(void) {
   if ( meSCCrystalSiz_ ) meSCCrystalSiz_->Reset();
 
   if ( meSCSeedEne_ ) meSCSeedEne_->Reset();
-
+  
   if ( meSCEne2_ ) meSCEne2_->Reset();
 
   if ( meSCEneVsEMax_ ) meSCEneVsEMax_->Reset();
 
   if ( meSCEneLowScale_ ) meSCEneLowScale_->Reset();
-
+  
   if ( meSCSeedMapOcc_ ) meSCSeedMapOcc_->Reset();
 
   if ( meSCMapSingleCrystal_ ) meSCMapSingleCrystal_->Reset();
@@ -556,7 +555,7 @@ void EBClusterTask::analyze(const Event& e, const EventSetup& c){
     for ( BasicClusterCollection::const_iterator bCluster = pBasicClusters->begin(); bCluster != pBasicClusters->end(); ++bCluster ) {
 
       meBCEne_->Fill(bCluster->energy());
-      meBCSiz_->Fill(float(bCluster->size()));
+      meBCSiz_->Fill(float(bCluster->getHitsByDetId().size()));
 
       float xphi = bCluster->phi();
       if ( xphi > M_PI*(9-1.5)/9 ) xphi = xphi - M_PI*2;
@@ -569,9 +568,9 @@ void EBClusterTask::analyze(const Event& e, const EventSetup& c){
       meBCNumMapProjEta_->Fill(bCluster->eta());
       meBCNumMapProjPhi_->Fill(xphi);
 
-      meBCSizMap_->Fill(xphi, bCluster->eta(), float(bCluster->size()));
-      meBCSizMapProjEta_->Fill(bCluster->eta(), float(bCluster->size()));
-      meBCSizMapProjPhi_->Fill(xphi, float(bCluster->size()));
+      meBCSizMap_->Fill(xphi, bCluster->eta(), float(bCluster->getHitsByDetId().size()));
+      meBCSizMapProjEta_->Fill(bCluster->eta(), float(bCluster->getHitsByDetId().size()));
+      meBCSizMapProjPhi_->Fill(xphi, float(bCluster->getHitsByDetId().size()));
 
       meBCETMap_->Fill(xphi, bCluster->eta(), float(bCluster->energy()) * sin(bCluster->position().theta()));
       meBCETMapProjEta_->Fill(bCluster->eta(), float(bCluster->energy()) * sin(bCluster->position().theta()));
@@ -615,33 +614,21 @@ void EBClusterTask::analyze(const Event& e, const EventSetup& c){
         if ( pTopology.isValid() ) {
           const CaloTopology *topology = pTopology.product();
 
-          // <= CMSSW_3_0_X
-          //BasicClusterRef theSeed = sCluster->seed();
-          // >= CMSSW_3_1_X
-          CaloClusterPtr theSeed = sCluster->seed();
+          BasicClusterRef theSeed = sCluster->seed();
 
 	  // Find the seed rec hit
-          // <= CMSSW_3_0_X
-          // std::vector<DetId> sIds = sCluster->getHitsByDetId();
-          // >= CMSSW_3_1_X
-          std::vector< std::pair<DetId,float> > sIds = sCluster->hitsAndFractions();
+	  std::vector<DetId> sIds = sCluster->getHitsByDetId();
 
 	  float eMax, e2nd;
 	  EcalRecHitCollection::const_iterator seedItr = ebRecHits->begin();
 	  EcalRecHitCollection::const_iterator secondItr = ebRecHits->begin();
 
-          // <= CMSSW_3_0_X
-          // for(std::vector<DetId>::const_iterator idItr = sIds.begin(); idItr != sIds.end(); ++idItr) {
-          // if(idItr->det() != DetId::Ecal) { continue; }
-          // EcalRecHitCollection::const_iterator hitItr = ebRecHits->find((*idItr));
-          // <= CMSSW_3_1_X
-	  for(std::vector< std::pair<DetId,float> >::const_iterator idItr = sIds.begin(); idItr != sIds.end(); ++idItr) {
-            DetId id = idItr->first;
-            if(id.det() != DetId::Ecal) { continue; }
-            EcalRecHitCollection::const_iterator hitItr = ebRecHits->find(id);
-            if(hitItr == ebRecHits->end()) { continue; }
-            if(hitItr->energy() > secondItr->energy()) { secondItr = hitItr; }
-            if(hitItr->energy() > seedItr->energy()) { std::swap(seedItr,secondItr); }
+	  for(std::vector<DetId>::const_iterator idItr = sIds.begin(); idItr != sIds.end(); ++idItr) {
+	     if(idItr->det() != DetId::Ecal) { continue; }
+	     EcalRecHitCollection::const_iterator hitItr = ebRecHits->find((*idItr));
+	     if(hitItr == ebRecHits->end()) { continue; }
+	     if(hitItr->energy() > secondItr->energy()) { secondItr = hitItr; }
+	     if(hitItr->energy() > seedItr->energy()) { std::swap(seedItr,secondItr); }
 	  }
 
 	  eMax = seedItr->energy();
@@ -656,7 +643,7 @@ void EBClusterTask::analyze(const Event& e, const EventSetup& c){
 	  meSCEne2_->Fill(eMax+e2nd);
 	  meSCEneVsEMax_->Fill(eMax,sCluster->energy());
 	  meSCEneLowScale_->Fill(sCluster->energy());
-
+	  
 	  // Prepare to fill maps
 	  int ism = Numbers::iSM(seedId);
 	  int ebeta = seedId.ieta();
@@ -673,7 +660,7 @@ void EBClusterTask::analyze(const Event& e, const EventSetup& c){
           c.get<EcalADCToGeVConstantRcd>().get(pAgc);
           if(pAgc.isValid()) {
             const EcalADCToGeVConstant* agc = pAgc.product();
-
+            
             if(seedItr->energy() / agc->getEBValue() > 12) {
 
               meSCSeedTimingSummary_->Fill( time );
