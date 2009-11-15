@@ -1,8 +1,8 @@
 /*
  * \file EBSelectiveReadoutTask.cc
  *
- * $Date: 2009/10/13 11:41:18 $
- * $Revision: 1.40 $
+ * $Date: 2009/11/15 10:39:09 $
+ * $Revision: 1.42 $
  * \author P. Gras
  * \author E. Di Marco
  *
@@ -346,6 +346,7 @@ void EBSelectiveReadoutTask::analyze(const Event& e, const EventSetup& c){
 
   for(int ietindex = 0; ietindex < 34; ietindex++ ) {
     for(int iptindex = 0; iptindex < 72; iptindex++ ) {
+
       if(nEvtAnyReadout[iptindex][ietindex]) {
 
         float xiet = (ietindex < 17) ? ietindex + 0.5 : (16-ietindex) + 0.5;
@@ -366,7 +367,6 @@ void EBSelectiveReadoutTask::analyze(const Event& e, const EventSetup& c){
         EBFullReadoutSRFlagMap_->setBinContent(binpt, binet, fraction);
         EBFullReadoutSRFlagMap_->setBinError(binpt, binet, error);
 
-
         fraction = float(nEvtRUForced[iptindex][ietindex]) / float(nEvtAnyReadout[iptindex][ietindex]);
         error = sqrt(fraction*(1-fraction)/float(nEvtAnyReadout[iptindex][ietindex]));
 
@@ -381,6 +381,7 @@ void EBSelectiveReadoutTask::analyze(const Event& e, const EventSetup& c){
         EBReadoutUnitForcedBitMap_->setBinError(binpt, binet, error);
 
       }
+
     }
   }
 
@@ -470,6 +471,7 @@ void EBSelectiveReadoutTask::analyze(const Event& e, const EventSetup& c){
 
   for(int ietindex = 0; ietindex < 34; ietindex++ ) {
     for(int iptindex = 0; iptindex < 72; iptindex++ ) {
+
       if(nEvtAnyInterest[iptindex][ietindex]) {
 
         float xiet = (ietindex < 17) ? ietindex + 0.5 : (16-ietindex) + 0.5;
@@ -490,7 +492,6 @@ void EBSelectiveReadoutTask::analyze(const Event& e, const EventSetup& c){
         EBHighInterestTriggerTowerFlagMap_->setBinContent(binpt, binet, fraction);
         EBHighInterestTriggerTowerFlagMap_->setBinError(binpt, binet, error);
 
-
         fraction = float(nEvtLowInterest[iptindex][ietindex]) / float(nEvtAnyInterest[iptindex][ietindex]);
         error = sqrt(fraction*(1-fraction)/float(nEvtAnyInterest[iptindex][ietindex]));
 
@@ -505,6 +506,7 @@ void EBSelectiveReadoutTask::analyze(const Event& e, const EventSetup& c){
         EBLowInterestTriggerTowerFlagMap_->setBinError(binpt, binet, error);
 
       }
+
     }
   }
 
