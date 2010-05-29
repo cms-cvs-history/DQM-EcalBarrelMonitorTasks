@@ -6,10 +6,6 @@
 #include "FWCore/Framework/interface/ESHandle.h"
 #include "FWCore/Framework/interface/EventSetup.h"
 
-#include "CondFormats/DataRecord/interface/RunSummaryRcd.h"
-#include "CondFormats/RunInfo/interface/RunSummary.h"
-#include "CondFormats/RunInfo/interface/RunInfo.h"
-
 #include "DQMServices/Core/interface/MonitorElement.h"
 #include "DQMServices/Core/interface/DQMStore.h"
 
@@ -101,65 +97,68 @@ void EBDataCertificationTask::endLuminosityBlock(const edm::LuminosityBlock&  lu
   // evaluate the DQM quality of observables checked by lumi
   float DQMVal[36];
   for (int i = 0; i < 36; i++) {
-    DQMVal[i] = 0.;
+    DQMVal[i] = -1.;
   }
 
-  sprintf(histo, (prefixME_ + "/EBIntegrityTask/EBIT weighted integrity errors by lumi").c_str());
+  sprintf(histo, (prefixME_ + "/EBSummaryClient/EB global summary").c_str());
   me = dqmStore_->get(histo);
-  hIntegrityByLumi_ = UtilsClient::getHisto<TH1F*>( me, cloneME_, hIntegrityByLumi_ );
 
-  sprintf(histo, (prefixME_ + "/EBStatusFlagsTask/FEStatus/EBSFT weighted frontend errors by lumi").c_str());
-  me = dqmStore_->get(histo);
-  hFrontendByLumi_ = UtilsClient::getHisto<TH1F*>( me, cloneME_, hFrontendByLumi_ );
+  if( me ) {
+    sprintf(histo, (prefixME_ + "/EBIntegrityTask/EBIT weighted integrity errors by lumi").c_str());
+    me = dqmStore_->get(histo);
+    hIntegrityByLumi_ = UtilsClient::getHisto<TH1F*>( me, cloneME_, hIntegrityByLumi_ );
 
-  float integrityErrSum, frontendErrSum;
-  integrityErrSum = frontendErrSum = 0.;
-  for ( int i=0; i<36; i++) {
-    float ismIntegrityQual = 1.0;
-    if( hIntegrityByLumi_ && hIntegrityByLumi_->GetBinContent(0) > 0 ) {
-      float errors = hIntegrityByLumi_->GetBinContent(i+1);
-      ismIntegrityQual = 1.0 - errors/hIntegrityByLumi_->GetBinContent(0);
-      integrityErrSum += errors;
+    sprintf(histo, (prefixME_ + "/EBStatusFlagsTask/FEStatus/EBSFT weighted frontend errors by lumi").c_str());
+    me = dqmStore_->get(histo);
+    hFrontendByLumi_ = UtilsClient::getHisto<TH1F*>( me, cloneME_, hFrontendByLumi_ );
+
+    float integrityErrSum = 0.;
+    float integrityQual = 1.0;
+    float frontendErrSum = 0.;
+    float frontendQual = 1.0;
+
+    for ( int i=0; i<36; i++) {
+      float ismIntegrityQual = 1.0;
+      if( hIntegrityByLumi_ && hIntegrityByLumi_->GetBinContent(0) > 0 ) {
+        float errors = hIntegrityByLumi_->GetBinContent(i+1);
+        ismIntegrityQual = 1.0 - errors/hIntegrityByLumi_->GetBinContent(0);
+        integrityErrSum += errors;
+      }
+      float ismFrontendQual = 1.0;
+      if( hFrontendByLumi_ && hFrontendByLumi_->GetBinContent(0) > 0 ) {
+        float errors = hFrontendByLumi_->GetBinContent(i+1);
+        ismFrontendQual = 1.0 - errors/hFrontendByLumi_->GetBinContent(0);
+        frontendErrSum += errors;
+      }
+      DQMVal[i] = std::min(ismIntegrityQual,ismFrontendQual);
     }
-    float ismFrontendQual = 1.0;
-    if( hFrontendByLumi_ && hFrontendByLumi_->GetBinContent(0) > 0 ) {
-      float errors = hFrontendByLumi_->GetBinContent(i+1);
-      ismFrontendQual = 1.0 - errors/hFrontendByLumi_->GetBinContent(0);
-      frontendErrSum += errors;
-    }
-    DQMVal[i] = std::min(ismIntegrityQual,ismFrontendQual);
 
-    sprintf(histo, "EcalBarrel_%s", Numbers::sEB(i+1).c_str());
-    me = dqmStore_->get(prefixME_ + "/EventInfo/reportSummaryContents/" + histo);
-    if( me ) me->Fill(DQMVal[i]);
+    for ( int i=0; i<36; i++) {
+      sprintf(histo, "EcalBarrel_%s", Numbers::sEB(i+1).c_str());
+      me = dqmStore_->get(prefixME_ + "/EventInfo/reportSummaryContents/" + histo);
+      if( me ) me->Fill(DQMVal[i]);
 
-    sprintf(histo, "reportSummaryMap");
-    me = dqmStore_->get(prefixME_ + "/EventInfo/" + histo );
-
-    if( me ) {
-      for( int iett=0; iett<17; iett++ ) {
-        for( int iptt=0; iptt<4; iptt++ ) {
-          int iettx = (i-1)*17 + iett + 1;
-          int ipttx = (i-1)*4 + iptt + 1;
-          me->setBinContent( ipttx, iettx, DQMVal[i]);
+      sprintf(histo, "reportSummaryMap");
+      me = dqmStore_->get(prefixME_ + "/EventInfo/" + histo );
+      if( me ) {
+        for ( int iett = 0; iett < 34; iett++ ) {
+          for ( int iptt = 0; iptt < 72; iptt++ ) {
+            int ism = ( iett<17 ) ? iptt/4+1 : 18+iptt/4+1;
+            if( i == (ism-1) ) me->setBinContent( iptt+1, iett+1, DQMVal[ism-1]);
+          }
         }
       }
     }
 
+    if( hIntegrityByLumi_ && hIntegrityByLumi_->GetBinContent(0) > 0 ) integrityQual = 1.0 - integrityErrSum/hIntegrityByLumi_->GetBinContent(0);
+    if( hFrontendByLumi_ && hFrontendByLumi_->GetBinContent(0) > 0 ) frontendQual = 1.0 - frontendErrSum/hFrontendByLumi_->GetBinContent(0);
+    float totDQMVal = std::min(integrityQual,frontendQual);
+
+    sprintf(histo, (prefixME_ + "/EventInfo/reportSummary").c_str());
+    me = dqmStore_->get(histo);
+    if( me ) me->Fill(totDQMVal);
+
   }
-
-  float totDQMVal = 0.;
-
-  float integrityQual = 1.0;
-  if( hIntegrityByLumi_ && hIntegrityByLumi_->GetBinContent(0) > 0 ) integrityQual = 1.0 - integrityErrSum/hIntegrityByLumi_->GetBinContent(0);
-  float frontendQual = 1.0;
-  if( hFrontendByLumi_ && hFrontendByLumi_->GetBinContent(0) > 0 ) frontendQual = 1.0 - frontendErrSum/hFrontendByLumi_->GetBinContent(0);
-
-  totDQMVal = std::min(integrityQual,frontendQual);
-
-  sprintf(histo, (prefixME_ + "/EventInfo/reportSummary").c_str());
-  me = dqmStore_->get(histo);
-  if( me ) me->Fill(totDQMVal);
 
   // now combine reduced DQM with DCS and DAQ
   sprintf(histo, (prefixME_ + "/EventInfo/DAQSummaryMap").c_str());
@@ -189,14 +188,15 @@ void EBDataCertificationTask::endLuminosityBlock(const edm::LuminosityBlock&  lu
 
       float xvalDAQ, xvalDCS;
       xvalDAQ = xvalDCS = -1.;
-      float xcert = -1;
+      float xcert = -1.;
 
       if ( hDAQ_ ) xvalDAQ = hDAQ_->GetBinContent( iptt+1, iett+1 );
       if ( hDCS_ ) xvalDCS = hDCS_->GetBinContent( iptt+1, iett+1 );
 
-      // all white means problems: DAQ and DCS not available and DQM empty
-      if ( xvalDQM == -1 && xvalDAQ == -1 && xvalDCS == -1) xcert = 0.0;
-      else {
+      if ( xvalDQM == -1 && xvalDAQ == -1 && xvalDCS == -1) {
+        // all white means problems: DAQ and DCS not available and DQM empty
+        xcert = 0.0;
+      } else {
         // do not consider the white value of DAQ and DCS (problems with DB)
         xcert = fabs(xvalDQM) * fabs(xvalDAQ) * fabs(xvalDCS);
       }
