@@ -1,8 +1,8 @@
 /*
  * \file EBTriggerTowerTask.cc
  *
- * $Date: 2010/03/29 12:18:39 $
- * $Revision: 1.102 $
+ * $Date: 2010/05/02 15:26:51 $
+ * $Revision: 1.103 $
  * \author G. Della Ricca
  * \author E. Di Marco
  *
@@ -18,7 +18,6 @@
 #include "DQM/EcalCommon/interface/Numbers.h"
 
 #include "DQM/EcalBarrelMonitorTasks/interface/EBTriggerTowerTask.h"
-#include "FWCore/Common/interface/TriggerNames.h"
 
 const int EBTriggerTowerTask::nTTEta = 17;
 const int EBTriggerTowerTask::nTTPhi = 4;
@@ -378,7 +377,8 @@ EBTriggerTowerTask::processDigis( const edm::Event& e, const edm::Handle<EcalTri
     int ntrigs = hltResults->size();
     if ( ntrigs!=0 ) {
 
-      const edm::TriggerNames & triggerNames = e.triggerNames(*hltResults);
+      edm::TriggerNames triggerNames;
+      triggerNames.init( *hltResults );
 
       for ( int itrig = 0; itrig != ntrigs; ++itrig ) {
         std::string trigName = triggerNames.triggerName(itrig);
