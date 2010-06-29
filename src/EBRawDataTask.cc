@@ -1,13 +1,8 @@
 /*
  * \file EBRawDataTask.cc
  *
-<<<<<<< EBRawDataTask.cc
- * $Date: 2010/06/29 15:53:29 $
- * $Revision: 1.28.2.1 $
-=======
- * $Date: 2010/06/29 18:44:22 $
- * $Revision: 1.32 $
->>>>>>> 1.32
+ * $Date: 2010/06/29 18:56:55 $
+ * $Revision: 1.28.2.2 $
  * \author E. Di Marco
  *
 */
@@ -539,17 +534,11 @@ void EBRawDataTask::analyze(const edm::Event& e, const edm::EventSetup& c){
         if(feBxs[fe] != ECALDCC_BunchCrossing && feBxs[fe] != -1) meEBBunchCrossingFEErrors_->Fill( xism, 1/(float)feBxs.size() );
       }
 
-<<<<<<< EBRawDataTask.cc
-      // vector of TCC channels has 4 elements for both EB and EE. 
-      // EB uses [0], EE uses [0-3].
-      if(tccBx[0] != ECALDCC_BunchCrossing && tccBx[0] != -1) meEBBunchCrossingTCCErrors_->Fill( xism );
-=======
       // vector of TCC channels has 4 elements for both EB and EE. 
       // EB uses [0], EE uses [0-3].
       if(tccBx.size() == MAX_TCC_SIZE) {
         if(tccBx[0] != ECALDCC_BunchCrossing && tccBx[0] != -1) meEBBunchCrossingTCCErrors_->Fill( xism );
       }
->>>>>>> 1.32
 
       if(srpBx != ECALDCC_BunchCrossing && srpBx != -1) meEBBunchCrossingSRPErrors_->Fill( xism );
 
@@ -564,15 +553,11 @@ void EBRawDataTask::analyze(const edm::Event& e, const edm::EventSetup& c){
         if(feLv1[fe] != ECALDCC_L1A_12bit - 1 && feLv1[fe] != -1) meEBL1AFEErrors_->Fill( xism, 1/(float)feLv1.size());
       }
 
-<<<<<<< EBRawDataTask.cc
-      if(tccLv1[0] != ECALDCC_L1A_12bit && tccLv1[0] != -1) meEBL1ATCCErrors_->Fill( xism );
-=======
       // vector of TCC channels has 4 elements for both EB and EE. 
       // EB uses [0], EE uses [0-3].
       if(tccLv1.size() == MAX_TCC_SIZE) {
         if(tccLv1[0] != ECALDCC_L1A_12bit && tccLv1[0] != -1) meEBL1ATCCErrors_->Fill( xism );
       }
->>>>>>> 1.32
 
       if(srpLv1 != ECALDCC_L1A_12bit && srpLv1 != -1) meEBL1ASRPErrors_->Fill( xism );
 
