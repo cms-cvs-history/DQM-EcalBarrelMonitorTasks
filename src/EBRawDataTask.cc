@@ -1,13 +1,8 @@
 /*
  * \file EBRawDataTask.cc
  *
-<<<<<<< EBRawDataTask.cc
- * $Date: 2010/06/29 19:04:34 $
- * $Revision: 1.28.2.3 $
-=======
- * $Date: 2010/06/30 15:08:12 $
- * $Revision: 1.33 $
->>>>>>> 1.33
+ * $Date: 2010/06/30 15:14:52 $
+ * $Revision: 1.28.2.4 $
  * \author E. Di Marco
  *
 */
