@@ -6,8 +6,9 @@
 #include "FWCore/Framework/interface/ESHandle.h"
 #include "FWCore/Framework/interface/EventSetup.h"
 
-#include "CondFormats/EcalObjects/interface/EcalDAQTowerStatus.h"
-#include "CondFormats/DataRecord/interface/EcalDAQTowerStatusRcd.h"
+#include "CondFormats/DataRecord/interface/RunSummaryRcd.h"
+#include "CondFormats/RunInfo/interface/RunSummary.h"
+#include "CondFormats/RunInfo/interface/RunInfo.h"
 
 #include "DQMServices/Core/interface/MonitorElement.h"
 #include "DQMServices/Core/interface/DQMStore.h"
@@ -27,6 +28,9 @@ EBDaqInfoTask::EBDaqInfoTask(const edm::ParameterSet& ps) {
   enableCleanup_ = ps.getUntrackedParameter<bool>("enableCleanup", false);
 
   mergeRuns_ = ps.getUntrackedParameter<bool>("mergeRuns", false);
+
+  EBFedRangeMin_ = ps.getUntrackedParameter<int>("EBFedRangeMin");
+  EBFedRangeMax_ = ps.getUntrackedParameter<int>("EBFedRangeMax");
 
   meEBDaqFraction_ = 0;
   meEBDaqActiveMap_ = 0;
@@ -77,75 +81,66 @@ void EBDaqInfoTask::endJob(void) {
 
 void EBDaqInfoTask::beginLuminosityBlock(const edm::LuminosityBlock& lumiBlock, const  edm::EventSetup& iSetup){
 
-  // information is by run, so fill the same for the run and for every lumi section
-  for ( int iett = 0; iett < 34; iett++ ) {
-    for ( int iptt = 0; iptt < 72; iptt++ ) {
-      readyLumi[iptt][iett] = 1;
+  this->reset();
+
+  for ( int iettx = 0; iettx < 34; iettx++ ) {
+    for ( int ipttx = 0; ipttx < 72; ipttx++ ) {
+      meEBDaqActiveMap_->setBinContent( ipttx+1, iettx+1, 0.0 );
     }
   }
 
+  edm::eventsetup::EventSetupRecordKey recordKey(edm::eventsetup::EventSetupRecordKey::TypeTag::findType("RunInfoRcd"));
 
-  if ( !iSetup.find( edm::eventsetup::EventSetupRecordKey::makeKey<EcalDAQTowerStatusRcd>() ) ) {
-    edm::LogWarning("EBDaqInfoTask") << "EcalDAQTowerStatus record not found";
-    return;
-  }
+  if( iSetup.find( recordKey ) ) {
 
-  edm::ESHandle<EcalDAQTowerStatus> pDAQStatus;
-  iSetup.get<EcalDAQTowerStatusRcd>().get(pDAQStatus);
-    if ( !pDAQStatus.isValid() ) {
-    edm::LogWarning("EBDaqInfoTask") << "EcalDAQTowerStatus record not valid";
-    return;
-  }
-  const EcalDAQTowerStatus *daqStatus = pDAQStatus.product();
+    edm::ESHandle<RunInfo> sumFED;
+    iSetup.get<RunInfoRcd>().get(sumFED);    
+   
+    std::vector<int> FedsInIds= sumFED->m_fed_in;   
 
-  for(int iz=-1; iz<=1; iz+=2) {
-    for(int iptt=0 ; iptt<72; iptt++) {
-      for(int iett=0 ; iett<17; iett++) {
-        if (EcalTrigTowerDetId::validDetId(iz,EcalBarrel,iett+1,iptt+1 )){
+    float EBFedCount = 0.;
 
-          EcalTrigTowerDetId ebid(iz,EcalBarrel,iett+1,iptt+1);
-          
-          uint16_t dbStatus = 0; // 0 = good
-          EcalDAQTowerStatus::const_iterator daqStatusIt = daqStatus->find( ebid.rawId() );
-          if ( daqStatusIt != daqStatus->end() ) dbStatus = daqStatusIt->getStatusCode();
+    for( unsigned int fedItr=0; fedItr<FedsInIds.size(); ++fedItr ) {
 
-          if ( dbStatus > 0 ) {
-            int ipttEB = iptt;
-            int iettEB = (iz==-1) ? iett : 17+iett;
-            readyRun[ipttEB][iettEB] = 0;
-            readyLumi[ipttEB][iettEB] = 0;
+      int fedID=FedsInIds[fedItr];
+
+      if( fedID >= EBFedRangeMin_ && fedID <= EBFedRangeMax_ ) {
+
+        EBFedCount++;
+        
+        int ism = fedID - EBFedRangeMin_ + 1;
+        int iesm = (ism-1) / 18 + 1;
+        int ipsm = (ism-1) % 18 + 1;
+
+        if (  meEBDaqActive_[ism-1] ) meEBDaqActive_[ism-1]->Fill(1.0);
+        
+        if( meEBDaqActiveMap_ ) {
+
+          for( int iett=0; iett<17; iett++ ) {
+            for( int iptt=0; iptt<4; iptt++ ) {
+              int iettx = (iesm-1)*17 + iett + 1;
+              int ipttx = (ipsm-1)*4 + iptt + 1;
+              meEBDaqActiveMap_->setBinContent( ipttx, iettx, 1.0);
+            }
           }
-          
-        }
+
+        }      
+    
       }
+        
     }
+
+    if( meEBDaqFraction_ ) meEBDaqFraction_->Fill( EBFedCount/36 );
+
+  } else {
+
+    edm::LogWarning("EBDaqInfoTask") << "Cannot find any edm::RunInfoRcd";
+
   }
 
 }
-
-
 
 void EBDaqInfoTask::endLuminosityBlock(const edm::LuminosityBlock&  lumiBlock, const  edm::EventSetup& iSetup) {
-
-    this->fillMonitorElements(readyLumi);
-
-}
-
-void EBDaqInfoTask::beginRun(const edm::Run& r, const edm::EventSetup& c) {
-
-  if ( ! mergeRuns_ ) this->reset();
-
-  for ( int iett = 0; iett < 34; iett++ ) {
-    for ( int iptt = 0; iptt < 72; iptt++ ) {
-      readyRun[iptt][iett] = 1;
-    }
-  }
-
-}
-
-void EBDaqInfoTask::endRun(const edm::Run& r, const edm::EventSetup& c) {
-
-  this->fillMonitorElements(readyRun);
 
 }
 
@@ -179,34 +174,6 @@ void EBDaqInfoTask::cleanup(void){
     }
 
   }
-
-}
-
-void EBDaqInfoTask::fillMonitorElements(int ready[72][34]) {
-
-  float readySum[36];
-  for ( int ism = 0; ism < 36; ism++ ) readySum[ism] = 0;
-  float readySumTot = 0.;
-
-  for ( int iett = 0; iett < 34; iett++ ) {
-    for ( int iptt = 0; iptt < 72; iptt++ ) {
-      
-      if(meEBDaqActiveMap_) meEBDaqActiveMap_->setBinContent( iptt+1, iett+1, ready[iptt][iett] );
-
-      int ism = ( iett<17 ) ? iptt/4 : 18+iptt/4; 
-      if(ready[iptt][iett]) {
-        readySum[ism]++;
-        readySumTot++;
-      }
-
-    }
-  }
-
-  for ( int ism = 0; ism < 36; ism++ ) {
-    if( meEBDaqActive_[ism] ) meEBDaqActive_[ism]->Fill( readySum[ism]/68. );
-  }
-
-  if( meEBDaqFraction_ ) meEBDaqFraction_->Fill(readySumTot/34./72.);
 
 }
 
