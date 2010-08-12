@@ -1,8 +1,8 @@
 /*
  * \file EBPedestalTask.cc
  *
- * $Date: 2010/07/30 05:40:22 $
- * $Revision: 1.100 $
+ * $Date: 2010/08/12 18:25:19 $
+ * $Revision: 1.100.2.1 $
  * \author G. Della Ricca
  *
 */
@@ -24,9 +24,9 @@
 #include "DataFormats/EcalDigi/interface/EBDataFrame.h"
 #include "DataFormats/EcalDigi/interface/EcalDigiCollections.h"
 
-#include <DQM/EcalCommon/interface/Numbers.h>
+#include "DQM/EcalCommon/interface/Numbers.h"
 
-#include <DQM/EcalBarrelMonitorTasks/interface/EBPedestalTask.h>
+#include "DQM/EcalBarrelMonitorTasks/interface/EBPedestalTask.h"
 
 // #define COMMON_NOISE_ANALYSIS
 

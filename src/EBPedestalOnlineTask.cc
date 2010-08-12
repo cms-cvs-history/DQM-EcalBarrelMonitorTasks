@@ -1,8 +1,8 @@
 /*
  * \file EBPedestalOnlineTask.cc
  *
- * $Date: 2010/02/12 21:34:02 $
- * $Revision: 1.44 $
+ * $Date: 2010/08/12 18:25:19 $
+ * $Revision: 1.45.6.1 $
  * \author G. Della Ricca
  *
 */
@@ -21,9 +21,9 @@
 #include "DataFormats/EcalDigi/interface/EBDataFrame.h"
 #include "DataFormats/EcalDigi/interface/EcalDigiCollections.h"
 
-#include <DQM/EcalCommon/interface/Numbers.h>
+#include "DQM/EcalCommon/interface/Numbers.h"
 
-#include <DQM/EcalBarrelMonitorTasks/interface/EBPedestalOnlineTask.h>
+#include "DQM/EcalBarrelMonitorTasks/interface/EBPedestalOnlineTask.h"
 
 EBPedestalOnlineTask::EBPedestalOnlineTask(const edm::ParameterSet& ps){
 

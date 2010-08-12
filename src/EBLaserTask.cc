@@ -1,8 +1,8 @@
 /*
  * \file EBLaserTask.cc
  *
- * $Date: 2010/07/30 05:40:22 $
- * $Revision: 1.131 $
+ * $Date: 2010/08/12 18:25:19 $
+ * $Revision: 1.131.2.1 $
  * \author G. Della Ricca
  *
 */
@@ -26,9 +26,9 @@
 #include "DataFormats/EcalRecHit/interface/EcalUncalibratedRecHit.h"
 #include "DataFormats/EcalRecHit/interface/EcalRecHitCollections.h"
 
-#include <DQM/EcalCommon/interface/Numbers.h>
+#include "DQM/EcalCommon/interface/Numbers.h"
 
-#include <DQM/EcalBarrelMonitorTasks/interface/EBLaserTask.h>
+#include "DQM/EcalBarrelMonitorTasks/interface/EBLaserTask.h"
 
 EBLaserTask::EBLaserTask(const edm::ParameterSet& ps){
 

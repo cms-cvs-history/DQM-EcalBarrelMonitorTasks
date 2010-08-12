@@ -1,8 +1,13 @@
 /*
  * \file EBBeamCaloTask.cc
  *
- * $Date: 2010/06/14 13:30:18 $
- * $Revision: 1.78 $
+<<<<<<< EBBeamCaloTask.cc
+ * $Date: 2010/06/29 15:53:29 $
+ * $Revision: 1.77.2.1 $
+=======
+ * $Date: 2010/08/12 18:25:18 $
+ * $Revision: 1.78.4.1 $
+>>>>>>> 1.78.4.1
  * \author A. Ghezzi
  *
  */
@@ -26,9 +31,9 @@
 
 #include "TBDataFormats/EcalTBObjects/interface/EcalTBCollections.h"
 
-#include <DQM/EcalCommon/interface/Numbers.h>
+#include "DQM/EcalCommon/interface/Numbers.h"
 
-#include <DQM/EcalBarrelMonitorTasks/interface/EBBeamCaloTask.h>
+#include "DQM/EcalBarrelMonitorTasks/interface/EBBeamCaloTask.h"
 
 EBBeamCaloTask::EBBeamCaloTask(const edm::ParameterSet& ps){
 
@@ -500,7 +505,7 @@ void EBBeamCaloTask::analyze(const edm::Event& e, const edm::EventSetup& c){
 //   //if(ievt_ > 115){tb_moving=true; }
 //   if(ievt_ > 150){tb_moving=false; cry_in_beam = 707;}
 
-  //   #include <DQM/EcalBarrelMonitorTasks/interface/cry_in_beam_run_ecs73214.h>
+  //   #include "DQM/EcalBarrelMonitorTasks/interface/cry_in_beam_run_ecs73214.h"
 
   if(ievt_ < 3){last_cry_in_beam_ = cry_in_beam;}
 

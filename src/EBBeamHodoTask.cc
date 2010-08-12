@@ -1,8 +1,8 @@
 /*
  * \file EBBeamHodoTask.cc
  *
- * $Date: 2009/10/26 17:33:48 $
- * $Revision: 1.62 $
+ * $Date: 2010/08/12 18:25:18 $
+ * $Revision: 1.63.6.1 $
  * \author G. Della Ricca
  * \author G. Franzoni
  *
@@ -25,9 +25,9 @@
 
 #include "TBDataFormats/EcalTBObjects/interface/EcalTBCollections.h"
 
-#include <DQM/EcalCommon/interface/Numbers.h>
+#include "DQM/EcalCommon/interface/Numbers.h"
 
-#include <DQM/EcalBarrelMonitorTasks/interface/EBBeamHodoTask.h>
+#include "DQM/EcalBarrelMonitorTasks/interface/EBBeamHodoTask.h"
 
 EBBeamHodoTask::EBBeamHodoTask(const edm::ParameterSet& ps){
 

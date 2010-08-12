@@ -1,8 +1,8 @@
 /*
  * \file EBTestPulseTask.cc
  *
- * $Date: 2010/07/30 05:40:22 $
- * $Revision: 1.115 $
+ * $Date: 2010/08/12 18:25:19 $
+ * $Revision: 1.115.2.1 $
  * \author G. Della Ricca
  * \author G. Franzoni
  *
@@ -26,9 +26,9 @@
 #include "DataFormats/EcalRecHit/interface/EcalUncalibratedRecHit.h"
 #include "DataFormats/EcalRecHit/interface/EcalRecHitCollections.h"
 
-#include <DQM/EcalCommon/interface/Numbers.h>
+#include "DQM/EcalCommon/interface/Numbers.h"
 
-#include <DQM/EcalBarrelMonitorTasks/interface/EBTestPulseTask.h>
+#include "DQM/EcalBarrelMonitorTasks/interface/EBTestPulseTask.h"
 
 EBTestPulseTask::EBTestPulseTask(const edm::ParameterSet& ps){
 

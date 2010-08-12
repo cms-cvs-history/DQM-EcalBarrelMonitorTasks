@@ -1,8 +1,8 @@
 /*
  * \file EBStatusFlagsTask.cc
  *
- * $Date: 2010/04/02 08:20:44 $
- * $Revision: 1.28 $
+ * $Date: 2010/08/12 18:25:19 $
+ * $Revision: 1.29.6.1 $
  * \author G. Della Ricca
  *
 */
@@ -20,9 +20,9 @@
 
 #include "DataFormats/EcalRawData/interface/EcalRawDataCollections.h"
 
-#include <DQM/EcalCommon/interface/Numbers.h>
+#include "DQM/EcalCommon/interface/Numbers.h"
 
-#include <DQM/EcalBarrelMonitorTasks/interface/EBStatusFlagsTask.h>
+#include "DQM/EcalBarrelMonitorTasks/interface/EBStatusFlagsTask.h"
 
 EBStatusFlagsTask::EBStatusFlagsTask(const edm::ParameterSet& ps){
 
@@ -276,7 +276,7 @@ void EBStatusFlagsTask::analyze(const edm::Event& e, const edm::EventSetup& c){
 
         }
 
-        if ( meFEchErrors_[ism-1][2] ) meFEchErrors_[ism-1][2]->Fill(status[itt-1]+0.5); 
+        if ( meFEchErrors_[ism-1][2] ) meFEchErrors_[ism-1][2]->Fill(status[itt-1]+0.5);
 
       }
 
