@@ -1,8 +1,8 @@
 /*
  * \file EBCosmicTask.cc
  *
- * $Date: 2010/02/12 21:57:30 $
- * $Revision: 1.115 $
+ * $Date: 2010/08/08 08:46:04 $
+ * $Revision: 1.117 $
  * \author G. Della Ricca
  *
 */
@@ -22,9 +22,9 @@
 #include "DataFormats/EcalRecHit/interface/EcalUncalibratedRecHit.h"
 #include "DataFormats/EcalRecHit/interface/EcalRecHitCollections.h"
 
-#include <DQM/EcalCommon/interface/Numbers.h>
+#include "DQM/EcalCommon/interface/Numbers.h"
 
-#include <DQM/EcalBarrelMonitorTasks/interface/EBCosmicTask.h>
+#include "DQM/EcalBarrelMonitorTasks/interface/EBCosmicTask.h"
 
 EBCosmicTask::EBCosmicTask(const edm::ParameterSet& ps){
 
