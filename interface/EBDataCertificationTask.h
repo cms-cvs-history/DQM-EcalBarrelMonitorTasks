@@ -1,15 +1,6 @@
 #ifndef EBDataCertificationTask_h
 #define EBDataCertificationTask_h
 
-/*
- * \file EBDataCertificationTask.h
- *
- * $Date: 2010/08/08 14:21:02 $
- * $Revision: 1.7 $
- * \author E. Di Marco
- *
-*/
-
 #include "FWCore/Framework/interface/EDAnalyzer.h"
 #include "FWCore/Framework/interface/Event.h"
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
@@ -72,7 +63,6 @@ TH2F *hDAQ_;
 TH2F *hDCS_;
 TH1F *hIntegrityByLumi_;
 TH1F *hFrontendByLumi_;
-TH1F *hSynchronizationByLumi_;
 
 MonitorElement* meEBDataCertificationSummary_;
 MonitorElement* meEBDataCertification_[36];
