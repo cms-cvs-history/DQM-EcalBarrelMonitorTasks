@@ -1,13 +1,8 @@
 /*
  * \file EBBeamCaloTask.cc
  *
-<<<<<<< EBBeamCaloTask.cc
- * $Date: 2010/06/29 15:53:29 $
- * $Revision: 1.77.2.1 $
-=======
- * $Date: 2010/08/12 18:25:18 $
- * $Revision: 1.78.4.1 $
->>>>>>> 1.78.4.1
+ * $Date: 2010/08/12 20:08:52 $
+ * $Revision: 1.77.2.2 $
  * \author A. Ghezzi
  *
  */
