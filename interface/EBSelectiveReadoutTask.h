@@ -4,8 +4,8 @@
 /*
  * \file EBSelectiveReadoutTask.h
  *
- * $Date: 2010/08/12 18:25:18 $
- * $Revision: 1.16.8.1 $
+ * $Date: 2010/11/10 10:43:29 $
+ * $Revision: 1.18 $
  * \author P. Gras
  * \author E. Di Marco
  *
@@ -132,7 +132,7 @@ enum subdet_t {EB, EE};
 /** Accumulates statitics for data volume analysis. To be called for each
  * ECAL digi. See anaDigiInit().
  */
-void anaDigi(const EBDataFrame& frame, const EBSrFlagCollection& srFlagColl);
+void anaDigi(const EBDataFrame& frame, const EBSrFlagCollection& srFlagColl, uint16_t statusCode);
 
 /** Initializes statistics accumalator for data volume analysis. To
  * be call at start of each event analysis.
