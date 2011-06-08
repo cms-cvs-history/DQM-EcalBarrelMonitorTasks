@@ -1,8 +1,8 @@
 /*
  * \file EBTimingTask.cc
  *
- * $Date: 2010/08/11 14:57:34 $
- * $Revision: 1.64 $
+ * $Date: 2011/06/08 18:29:03 $
+ * $Revision: 1.64.2.1 $
  * \author G. Della Ricca
  *
 */
@@ -119,7 +119,7 @@ void EBTimingTask::setup(void){
       dqmStore_->tag(meTime_[i], i+1);
 
       sprintf(histo, "EBTMT timing %s", Numbers::sEB(i+1).c_str());
-      meTimeMap_[i] = dqmStore_->bookProfile2D(histo, histo, 85, 0., 85., 20, 0., 20., 50, 45., 55., "s");
+      meTimeMap_[i] = dqmStore_->bookProfile2D(histo, histo, 85, 0., 85., 20, 0., 20., 50, 25., 75., "s");
       meTimeMap_[i]->setAxisTitle("ieta", 1);
       meTimeMap_[i]->setAxisTitle("iphi", 2);
       meTimeMap_[i]->setAxisTitle("time (ns)", 3);
@@ -142,7 +142,7 @@ void EBTimingTask::setup(void){
     meTimeSummary1D_->setAxisTitle("time (ns)", 1);
 
     sprintf(histo, "EBTMT timing map");
-    meTimeSummaryMap_ = dqmStore_->bookProfile2D(histo, histo, 72, 0., 360., 34, -85, 85, 50, 45., 55., "s");
+    meTimeSummaryMap_ = dqmStore_->bookProfile2D(histo, histo, 72, 0., 360., 34, -85, 85, 50, 25., 75., "s");
     meTimeSummaryMap_->setAxisTitle("jphi", 1);
     meTimeSummaryMap_->setAxisTitle("jeta", 2);
     meTimeSummaryMap_->setAxisTitle("time (ns)", 3);
