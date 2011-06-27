@@ -1,8 +1,8 @@
 /*
  * \file EBTimingTask.cc
  *
- * $Date: 2011/02/14 08:01:28 $
- * $Revision: 1.66 $
+ * $Date: 2011/06/27 09:08:17 $
+ * $Revision: 1.66.2.1 $
  * \author G. Della Ricca
  *
 */
@@ -118,7 +118,7 @@ void EBTimingTask::setup(void){
       dqmStore_->tag(meTime_[i], i+1);
 
       sprintf(histo, "EBTMT timing %s", Numbers::sEB(i+1).c_str());
-      meTimeMap_[i] = dqmStore_->bookProfile2D(histo, histo, 85, 0., 85., 20, 0., 20., 50, -75.+shiftProf2D, 75.+shiftProf2D, "s");
+      meTimeMap_[i] = dqmStore_->bookProfile2D(histo, histo, 85, 0., 85., 20, 0., 20., 50, -25.+shiftProf2D, 25.+shiftProf2D, "s");
       meTimeMap_[i]->setAxisTitle("ieta", 1);
       meTimeMap_[i]->setAxisTitle("iphi", 2);
       meTimeMap_[i]->setAxisTitle("time (ns)", 3);
@@ -141,18 +141,18 @@ void EBTimingTask::setup(void){
     meTimeSummary1D_->setAxisTitle("time (ns)", 1);
 
     sprintf(histo, "EBTMT timing map");
-    meTimeSummaryMap_ = dqmStore_->bookProfile2D(histo, histo, 72, 0., 360., 34, -85, 85, 50, -75.+shiftProf2D, 75.+shiftProf2D, "s");
+    meTimeSummaryMap_ = dqmStore_->bookProfile2D(histo, histo, 72, 0., 360., 34, -85, 85, 50, -25.+shiftProf2D, 25.+shiftProf2D, "s");
     meTimeSummaryMap_->setAxisTitle("jphi", 1);
     meTimeSummaryMap_->setAxisTitle("jeta", 2);
     meTimeSummaryMap_->setAxisTitle("time (ns)", 3);
 
     sprintf(histo, "EBTMT timing projection eta");
-    meTimeSummaryMapProjEta_ = dqmStore_->bookProfile(histo, histo, 34, -85., 85., 50, -50., 50., "s");
+    meTimeSummaryMapProjEta_ = dqmStore_->bookProfile(histo, histo, 34, -85., 85., 50, -25., 25., "s");
     meTimeSummaryMapProjEta_->setAxisTitle("jeta", 1);
     meTimeSummaryMapProjEta_->setAxisTitle("time (ns)", 2);
 
     sprintf(histo, "EBTMT timing projection phi");
-    meTimeSummaryMapProjPhi_ = dqmStore_->bookProfile(histo, histo, 72, 0., 360., 50, -50., 50., "s");
+    meTimeSummaryMapProjPhi_ = dqmStore_->bookProfile(histo, histo, 72, 0., 360., 50, -25., 25., "s");
     meTimeSummaryMapProjPhi_->setAxisTitle("jphi", 1);
     meTimeSummaryMapProjPhi_->setAxisTitle("time (ns)", 2);
 
