@@ -1,14 +1,15 @@
 /*
  * \file EBPedestalTask.cc
  *
- * $Date: 2010/08/08 08:46:05 $
- * $Revision: 1.101 $
+ * $Date: 2011/08/23 00:25:32 $
+ * $Revision: 1.101.4.1 $
  * \author G. Della Ricca
  *
 */
 
 #include <iostream>
 #include <sstream>
+#include <iomanip>
 #include <vector>
 #include <algorithm>
 
@@ -134,7 +135,7 @@ void EBPedestalTask::setup(void){
   init_ = true;
 
   std::string name;
-  std::string GainN, GN;
+  std::stringstream GainN, GN;
 
   if ( dqmStore_ ) {
     dqmStore_->setCurrentFolder(prefixME_ + "/EBPedestalTask");
@@ -142,9 +143,9 @@ void EBPedestalTask::setup(void){
     if (find(MGPAGains_.begin(), MGPAGains_.end(), 1) != MGPAGains_.end() ) {
 
       GainN.str("");
-      GainN << "Gain" << setw(2) << setfill('0') << 1;
+      GainN << "Gain" << std::setw(2) << std::setfill('0') << 1;
       GN.str("");
-      GN << "G" << setw(2) << setfill('0') << 1;
+      GN << "G" << std::setw(2) << std::setfill('0') << 1;
 
       dqmStore_->setCurrentFolder(prefixME_ + "/EBPedestalTask/" + GainN.str());
       for (int i = 0; i < 36; i++) {
@@ -172,9 +173,9 @@ void EBPedestalTask::setup(void){
     if (find(MGPAGains_.begin(), MGPAGains_.end(), 6) != MGPAGains_.end() ) {
 
       GainN.str("");
-      GainN << "Gain" << setw(2) << setfill('0') << 6;
+      GainN << "Gain" << std::setw(2) << std::setfill('0') << 6;
       GN.str("");
-      GN << "G" << setw(2) << setfill('0') << 6;
+      GN << "G" << std::setw(2) << std::setfill('0') << 6;
 
       dqmStore_->setCurrentFolder(prefixME_ + "/EBPedestalTask/" + GainN.str());
       for (int i = 0; i < 36; i++) {
@@ -202,9 +203,9 @@ void EBPedestalTask::setup(void){
     if (find(MGPAGains_.begin(), MGPAGains_.end(), 12) != MGPAGains_.end() ) {
 
       GainN.str("");
-      GainN << "Gain" << setw(2) << setfill('0') << 12;
+      GainN << "Gain" << std::setw(2) << std::setfill('0') << 12;
       GN.str("");
-      GN << "G" << setw(2) << setfill('0') << 12;
+      GN << "G" << std::setw(2) << std::setfill('0') << 12;
 
       dqmStore_->setCurrentFolder(prefixME_ + "/EBPedestalTask/" + GainN.str());
       for (int i = 0; i < 36; i++) {
@@ -234,9 +235,9 @@ void EBPedestalTask::setup(void){
     if (find(MGPAGainsPN_.begin(), MGPAGainsPN_.end(), 1) != MGPAGainsPN_.end() ) {
 
       GainN.str("");
-      GainN << "Gain" << setw(2) << setfill('0') << 1;
+      GainN << "Gain" << std::setw(2) << std::setfill('0') << 1;
       GN.str("");
-      GN << "G" << setw(2) << setfill('0') << 1;
+      GN << "G" << std::setw(2) << std::setfill('0') << 1;
 
       dqmStore_->setCurrentFolder(prefixME_ + "/EBPedestalTask/PN/" + GainN.str());
       for (int i = 0; i < 36; i++) {
@@ -252,9 +253,9 @@ void EBPedestalTask::setup(void){
     if (find(MGPAGainsPN_.begin(), MGPAGainsPN_.end(), 16) != MGPAGainsPN_.end() ) {
 
       GainN.str("");
-      GainN << "Gain" << setw(2) << setfill('0') << 16;
+      GainN << "Gain" << std::setw(2) << std::setfill('0') << 16;
       GN.str("");
-      GN << "G" << setw(2) << setfill('0') << 16;
+      GN << "G" << std::setw(2) << std::setfill('0') << 16;
 
       dqmStore_->setCurrentFolder(prefixME_ + "/EBPedestalTask/PN/" + GainN.str());
       for (int i = 0; i < 36; i++) {

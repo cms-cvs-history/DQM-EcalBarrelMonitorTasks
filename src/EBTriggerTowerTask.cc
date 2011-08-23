@@ -1,8 +1,8 @@
 /*
  * \file EBTriggerTowerTask.cc
  *
- * $Date: 2011/06/08 18:15:03 $
- * $Revision: 1.104.4.1 $
+ * $Date: 2011/08/23 00:25:32 $
+ * $Revision: 1.104.4.2 $
  * \author G. Della Ricca
  * \author E. Di Marco
  *
@@ -145,8 +145,8 @@ void EBTriggerTowerTask::setup(void){
   }
 }
 
-void EBTriggerTowerTask::setup( std::string nameext,
-                                std::string folder,
+void EBTriggerTowerTask::setup( std::string const &nameext,
+                                std::string const &folder,
                                 bool emulated ) {
 
   array1*  meEtMap = &meEtMapReal_;
