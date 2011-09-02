@@ -1,8 +1,8 @@
 /*
  * \file EBOccupancyTask.cc
  *
- * $Date: 2011/08/23 00:25:31 $
- * $Revision: 1.94.2.1 $
+ * $Date: 2011/08/30 09:30:32 $
+ * $Revision: 1.96 $
  * \author G. Della Ricca
  * \author G. Franzoni
  *
@@ -537,7 +537,7 @@ void EBOccupancyTask::analyze(const edm::Event& e, const edm::EventSetup& c){
 	
         uint32_t sev = sevlv->severityLevel( id, *rechits);
 
-        if ( rechitItr->energy() > recHitEnergyMin_ && flag == EcalRecHit::kGood && sev == EcalSeverityLevel::kGood ) {
+        if ( rechitItr->energy() > recHitEnergyMin_ && flag == EcalRecHit::kGood && sev == EcalSeverityLevelAlgo::kGood ) {
 
           if ( meEBRecHitOccupancyThr_ ) meEBRecHitOccupancyThr_->Fill( xebphi, xebeta );
           if ( meEBRecHitOccupancyProjEtaThr_ ) meEBRecHitOccupancyProjEtaThr_->Fill( xebeta );
@@ -545,7 +545,7 @@ void EBOccupancyTask::analyze(const edm::Event& e, const edm::EventSetup& c){
 
         }
 
-        if ( flag == EcalRecHit::kGood && sev == EcalSeverityLevel::kGood ) {
+        if ( flag == EcalRecHit::kGood && sev == EcalSeverityLevelAlgo::kGood ) {
           if ( meEBRecHitEnergy_[ism-1] ) meEBRecHitEnergy_[ism-1]->Fill( xie, xip, rechitItr->energy() );
           if ( meSpectrum_[ism-1] ) meSpectrum_[ism-1]->Fill( rechitItr->energy() );
           if ( meEBRecHitSpectrum_ ) meEBRecHitSpectrum_->Fill( rechitItr->energy() );
