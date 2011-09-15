@@ -1,8 +1,8 @@
 /*
  * \file EBTimingTask.cc
  *
- * $Date: 2011/09/15 20:59:51 $
- * $Revision: 1.72 $
+ * $Date: 2011/09/15 21:26:31 $
+ * $Revision: 1.70.2.3 $
  * \author G. Della Ricca
  *
 */
@@ -49,8 +49,6 @@ EBTimingTask::EBTimingTask(const edm::ParameterSet& ps){
 
   EcalRawDataCollection_ = ps.getParameter<edm::InputTag>("EcalRawDataCollection");
   EcalRecHitCollection_ = ps.getParameter<edm::InputTag>("EcalRecHitCollection");
-
-  L1GtEvmReadoutRecord_ = ps.getParameter<edm::InputTag>("L1GtEvmReadoutRecord");
 
   useBeamStatus_ = ps.getUntrackedParameter<bool>("useBeamStatus", false);
 
@@ -324,7 +322,7 @@ void EBTimingTask::analyze(const edm::Event& e, const edm::EventSetup& c){
 
       uint32_t sev = sevlv->severityLevel(id, *hits);
 
-      if ( (flag == EcalRecHit::kGood || flag == EcalRecHit::kOutOfTime) && sev != EcalSeverityLevel::kWeird ) {
+      if ( (flag == EcalRecHit::kGood || flag == EcalRecHit::kOutOfTime) && sev != EcalSeverityLevelAlgo::kWeird ) {
         if ( meTimeAmpli ) meTimeAmpli->Fill(xval, yval);
         if ( meTimeAmpliSummary_ ) meTimeAmpliSummary_->Fill(xval, yval);
 
