@@ -1,8 +1,8 @@
 /*
  * \file EBTimingTask.cc
  *
- * $Date: 2011/09/14 14:02:26 $
- * $Revision: 1.70.2.2 $
+ * $Date: 2011/09/15 21:26:31 $
+ * $Revision: 1.70.2.3 $
  * \author G. Della Ricca
  *
 */
@@ -49,6 +49,8 @@ EBTimingTask::EBTimingTask(const edm::ParameterSet& ps){
 
   EcalRawDataCollection_ = ps.getParameter<edm::InputTag>("EcalRawDataCollection");
   EcalRecHitCollection_ = ps.getParameter<edm::InputTag>("EcalRecHitCollection");
+
+  useBeamStatus_ = ps.getUntrackedParameter<bool>("useBeamStatus", false);
 
   for (int i = 0; i < 36; i++) {
     meTime_[i] = 0;
@@ -255,7 +257,7 @@ void EBTimingTask::analyze(const edm::Event& e, const edm::EventSetup& c){
   ievt_++;
 
   // resetting plots when stable beam is declared
-  if( !stableBeamsDeclared_ ) {
+  if( useBeamStatus_ && !stableBeamsDeclared_ ) {
     edm::Handle<L1GlobalTriggerEvmReadoutRecord> gtRecord;
     if( e.getByLabel(L1GtEvmReadoutRecord_, gtRecord) ) {
 
