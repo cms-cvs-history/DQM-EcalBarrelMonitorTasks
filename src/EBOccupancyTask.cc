@@ -1,8 +1,8 @@
 /*
  * \file EBOccupancyTask.cc
  *
- * $Date: 2011/08/23 00:25:31 $
- * $Revision: 1.94.2.1 $
+ * $Date: 2011/08/30 09:30:32 $
+ * $Revision: 1.96 $
  * \author G. Della Ricca
  * \author G. Franzoni
  *
@@ -41,6 +41,8 @@ EBOccupancyTask::EBOccupancyTask(const edm::ParameterSet& ps){
   dqmStore_ = edm::Service<DQMStore>().operator->();
 
   prefixME_ = ps.getUntrackedParameter<std::string>("prefixME", "");
+
+  subfolder_ = ps.getUntrackedParameter<std::string>("subfolder", "");
 
   enableCleanup_ = ps.getUntrackedParameter<bool>("enableCleanup", false);
 
@@ -100,6 +102,8 @@ void EBOccupancyTask::beginJob(void){
 
   if ( dqmStore_ ) {
     dqmStore_->setCurrentFolder(prefixME_ + "/EBOccupancyTask");
+    if(subfolder_.size())
+      dqmStore_->setCurrentFolder(prefixME_ + "/EBOccupancyTask/" + subfolder_);
     dqmStore_->rmdir(prefixME_ + "/EBOccupancyTask");
   }
 
@@ -162,6 +166,8 @@ void EBOccupancyTask::setup(void){
 
   if ( dqmStore_ ) {
     dqmStore_->setCurrentFolder(prefixME_ + "/EBOccupancyTask");
+    if(subfolder_.size())
+      dqmStore_->setCurrentFolder(prefixME_ + "/EBOccupancyTask/" + subfolder_);
 
     for (int i = 0; i < 36; i++) {
       name = "EBOT digi occupancy " + Numbers::sEB(i+1);
@@ -283,6 +289,8 @@ void EBOccupancyTask::cleanup(void){
 
   if ( dqmStore_ ) {
     dqmStore_->setCurrentFolder(prefixME_ + "/EBOccupancyTask");
+    if(subfolder_.size())
+      dqmStore_->setCurrentFolder(prefixME_ + "/EBOccupancyTask/" + subfolder_);
 
     for (int i = 0; i < 36; i++) {
       if ( meOccupancy_[i] ) dqmStore_->removeElement( meOccupancy_[i]->getName() );

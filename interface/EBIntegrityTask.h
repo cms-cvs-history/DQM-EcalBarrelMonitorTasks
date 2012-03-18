@@ -4,8 +4,8 @@
 /*
  * \file EBIntegrityTask.h
  *
- * $Date: 2009/10/26 17:33:47 $
- * $Revision: 1.29 $
+ * $Date: 2010/03/05 18:22:17 $
+ * $Revision: 1.30 $
  * \author G. Della Ricca
  *
  */
@@ -67,6 +67,8 @@ int ievt_;
 DQMStore* dqmStore_;
 
 std::string prefixME_;
+
+ std::string subfolder_;
 
 bool enableCleanup_;
 
