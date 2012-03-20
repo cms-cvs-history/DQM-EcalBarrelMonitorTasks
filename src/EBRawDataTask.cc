@@ -1,8 +1,8 @@
 /*
  * \file EBRawDataTask.cc
  *
- * $Date: 2010/08/11 14:57:34 $
- * $Revision: 1.39 $
+ * $Date: 2011/08/30 09:30:32 $
+ * $Revision: 1.40 $
  * \author E. Di Marco
  *
 */
@@ -36,6 +36,8 @@ EBRawDataTask::EBRawDataTask(const edm::ParameterSet& ps) {
   dqmStore_ = edm::Service<DQMStore>().operator->();
 
   prefixME_ = ps.getUntrackedParameter<std::string>("prefixME", "");
+
+  subfolder_ = ps.getUntrackedParameter<std::string>("subfolder", "");
 
   enableCleanup_ = ps.getUntrackedParameter<bool>("enableCleanup", false);
 
@@ -76,6 +78,8 @@ void EBRawDataTask::beginJob(void){
 
   if ( dqmStore_ ) {
     dqmStore_->setCurrentFolder(prefixME_ + "/EBRawDataTask");
+    if(subfolder_.size())
+      dqmStore_->setCurrentFolder(prefixME_ + "/EBRawDataTask/" + subfolder_);
     dqmStore_->rmdir(prefixME_ + "/EBRawDataTask");
   }
 
@@ -129,6 +133,8 @@ void EBRawDataTask::setup(void){
 
   if ( dqmStore_ ) {
     dqmStore_->setCurrentFolder(prefixME_ + "/EBRawDataTask");
+    if(subfolder_.size())
+      dqmStore_->setCurrentFolder(prefixME_ + "/EBRawDataTask/" + subfolder_);
 
     name = "EBRDT event type pre calibration BX";
     meEBEventTypePreCalibrationBX_ = dqmStore_->book1D(name, name, 31, -1., 30.);
@@ -306,6 +312,8 @@ void EBRawDataTask::cleanup(void){
 
   if ( dqmStore_ ) {
     dqmStore_->setCurrentFolder(prefixME_ + "/EBRawDataTask");
+    if(subfolder_.size())
+      dqmStore_->setCurrentFolder(prefixME_ + "/EBRawDataTask/" + subfolder_);
 
     if ( meEBEventTypePreCalibrationBX_ ) dqmStore_->removeElement( meEBEventTypePreCalibrationBX_->getName() );
     meEBEventTypePreCalibrationBX_ = 0;

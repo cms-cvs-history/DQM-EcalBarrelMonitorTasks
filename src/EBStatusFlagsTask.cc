@@ -1,8 +1,8 @@
 /*
  * \file EBStatusFlagsTask.cc
  *
- * $Date: 2011/08/23 00:25:32 $
- * $Revision: 1.33.4.1 $
+ * $Date: 2011/08/30 09:30:33 $
+ * $Revision: 1.34 $
  * \author G. Della Ricca
  *
 */
@@ -32,6 +32,8 @@ EBStatusFlagsTask::EBStatusFlagsTask(const edm::ParameterSet& ps){
 
   prefixME_ = ps.getUntrackedParameter<std::string>("prefixME", "");
 
+  subfolder_ = ps.getUntrackedParameter<std::string>("subfolder", "");
+
   enableCleanup_ = ps.getUntrackedParameter<bool>("enableCleanup", false);
 
   mergeRuns_ = ps.getUntrackedParameter<bool>("mergeRuns", false);
@@ -60,6 +62,8 @@ void EBStatusFlagsTask::beginJob(void){
 
   if ( dqmStore_ ) {
     dqmStore_->setCurrentFolder(prefixME_ + "/EBStatusFlagsTask");
+    if(subfolder_.size())
+      dqmStore_->setCurrentFolder(prefixME_ + "/EBStatusFlagsTask/" + subfolder_);
     dqmStore_->rmdir(prefixME_ + "/EBStatusFlagsTask");
   }
 
@@ -103,11 +107,16 @@ void EBStatusFlagsTask::setup(void){
   init_ = true;
 
   std::string name;
+  std::string dir;
 
   if ( dqmStore_ ) {
-    dqmStore_->setCurrentFolder(prefixME_ + "/EBStatusFlagsTask");
+    dir = prefixME_ + "/EBStatusFlagsTask";
+    if(subfolder_.size())
+      dir = prefixME_ + "/EBStatusFlagsTask/" + subfolder_;
 
-    dqmStore_->setCurrentFolder(prefixME_ + "/EBStatusFlagsTask/EvtType");
+    dqmStore_->setCurrentFolder(dir);
+
+    dqmStore_->setCurrentFolder(dir + "/EvtType");
     for (int i = 0; i < 36; i++) {
       name = "EBSFT EVTTYPE " + Numbers::sEB(i+1);
       meEvtType_[i] = dqmStore_->book1D(name, name, 31, -1., 30.);
@@ -138,7 +147,7 @@ void EBStatusFlagsTask::setup(void){
       dqmStore_->tag(meEvtType_[i], i+1);
     }
 
-    dqmStore_->setCurrentFolder(prefixME_ + "/EBStatusFlagsTask/FEStatus");
+    dqmStore_->setCurrentFolder(dir + "/FEStatus");
     for (int i = 0; i < 36; i++) {
       name = "EBSFT front-end status " + Numbers::sEB(i+1);
       meFEchErrors_[i][0] = dqmStore_->book2D(name, name, 17, 0., 17., 4, 0., 4.);
@@ -192,15 +201,20 @@ void EBStatusFlagsTask::cleanup(void){
   if ( ! init_ ) return;
 
   if ( dqmStore_ ) {
-    dqmStore_->setCurrentFolder(prefixME_ + "/EBStatusFlagsTask");
 
-    dqmStore_->setCurrentFolder(prefixME_ + "/EBStatusFlagsTask/EvtType");
+    std::string dir = prefixME_ + "/EBStatusFlagsTask";
+    if(subfolder_.size())
+      dir = prefixME_ + "/EBStatusFlagsTask/" + subfolder_;
+
+    dqmStore_->setCurrentFolder(dir + "");
+
+    dqmStore_->setCurrentFolder(dir + "/EvtType");
     for (int i = 0; i < 36; i++) {
       if ( meEvtType_[i] ) dqmStore_->removeElement( meEvtType_[i]->getName() );
       meEvtType_[i] = 0;
     }
 
-    dqmStore_->setCurrentFolder(prefixME_ + "/EBStatusFlagsTask/FEStatus");
+    dqmStore_->setCurrentFolder(dir + "/FEStatus");
     for (int i = 0; i < 36; i++) {
       if ( meFEchErrors_[i][0] ) dqmStore_->removeElement( meFEchErrors_[i][0]->getName() );
       meFEchErrors_[i][0] = 0;
