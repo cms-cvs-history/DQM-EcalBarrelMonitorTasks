@@ -1,8 +1,8 @@
 /*
  * \file EBLaserTask.cc
  *
- * $Date: 2011/10/28 14:15:46 $
- * $Revision: 1.136 $
+ * $Date: 2012/04/13 17:59:44 $
+ * $Revision: 1.136.2.1 $
  * \author G. Della Ricca
  *
 */
@@ -710,6 +710,8 @@ void EBLaserTask::analyze(const edm::Event& e, const edm::EventSetup& c){
     for(int i(0); i < 10; i++)
       maxpos[i] = 0;
 
+    int nReadouts(0);
+
     for ( EBDigiCollection::const_iterator digiItr = digis->begin(); digiItr != digis->end(); ++digiItr ) {
 
       EBDetId id = digiItr->id();
@@ -720,6 +722,8 @@ void EBLaserTask::analyze(const edm::Event& e, const edm::EventSetup& c){
                runType[ism-1] == EcalDCCHeaderBlock::LASER_GAP ) ) continue;
 
       if ( rtHalf[ism-1] != Numbers::RtHalf(id) ) continue;
+
+      nReadouts++;
 
       EBDataFrame dataframe = (*digiItr);
 
@@ -740,7 +744,7 @@ void EBLaserTask::analyze(const edm::Event& e, const edm::EventSetup& c){
 
     }
 
-    int threshold = 600;
+    int threshold(nReadouts / 2);
     enable = false;
     for(int i(0); i < 10; i++){
       if(maxpos[i] > threshold){
